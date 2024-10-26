@@ -1,1 +1,111 @@
-hello
+At its core, Nmap is a network scanning tool that uses IP packets to identify all the devices
+connected to a network and to provide information on the services and operating systems they are
+running.
+The program is most commonly used via a command-line interface (though GUI front-ends are also
+available) and is available for many different operating systems such as Linux, Free BSD, and
+Gentoo. Its popularity has also been bolstered by an active and enthusiastic user support
+community.
+Nmap was developed for enterprise-scale networks and can scan through thousands of connected
+devices. However, in recent years Nmap is being increasingly used by smaller companies. The rise
+of the IoT, in particular, now means that the networks used by these companies have become more
+complex and therefore harder to secure.
+This means that Nmap is now used in many website monitoring tools to audit the traffic between
+web servers and IoT devices. The recent emergence of IoT botnets, like Mirai, has also stimulated
+interest in Nmap, not least because of its ability to interrogate devices connected via the UPnP
+protocol and to highlight any devices that may be malicious.
+Department of CSE Computer Networks Lab
+ROLL NO. ADITYA COLLEGE OF ENGINEERING AND TECHNOLOGIES PAGE | 43
+What Does Nmap Do?
+At a practical level, Nmap is used to provide detailed, real-time information on your networks, and
+on the devices connected to them.
+The primary uses of Nmap can be broken into three core processes. First, the program gives you
+detailed information on every IP active on your networks, and each IP can then be scanned. This
+allows administrators to check whether an IP is being used by a legitimate service, or by an external
+attacker.
+Secondly, Nmap provides information on your network as a whole. It can be used to provide a list
+of live hosts and open ports, as well as identifying the OS of every connected device. This makes it
+a valuable tool in ongoing system monitoring, as well as a critical part of pentesting. Nmap can be
+used alongside the Metasploit framework, for instance, to probe and then repair network
+vulnerabilities.
+Thirdly, Nmap has also become a valuable tool for users looking to protect personal and business
+websites. Using Nmap to scan your own web server, particularly if you are hosting your website
+from home, is essentially simulating the process that a hacker would use to attack your site.
+“Attacking” your own site in this way is a powerful way of identifying security vulnerabilities.
+Department of CSE Computer Networks Lab
+ROLL NO. ADITYA COLLEGE OF ENGINEERING AND TECHNOLOGIES PAGE | 44
+How To Use Nmap
+Nmap is straightforward to use, and most of the tools it provides are familiar to system admins from
+other programs. The advantage of Nmap is that it brings a wide range of these tools into one
+program, rather than forcing you to skip between separate and discrete network monitoring tools.
+In order to use Nmap, you need to be familiar with command-line interfaces. Most advanced users
+are able to write scripts to automate common tasks, but this is not necessary for basic network
+monitoring.
+How To Install Nmap
+The process for installing Nmap is easy but varies according to your operating system. The
+Windows, Mac, and Linux versions of the program can be downloaded here.
+ For Windows, Nmap comes with a custom installer (namp<version>setup.exe). Download
+and run this installer, and it automatically configures Nmap on your system.
+ On Mac, Nmap also comes with a dedicated installer. Run the Nmap-<version>mpkg file to
+start this installer. On some recent versions of macOS, you might see a warning that Nmap
+is an “unidentified developer”, but you can ignore this warning.
+ Linux users can either compile Nmap from source or use their chosen package manager. To
+use apt, for instance, you can run Nmap –version to check if Nmap is installed, and sudo
+apt-get install Nmap to install it.
+Nmap Tutorial and Examples
+Once you‟ve installed Nmap, the best way of learning how to use it is to perform some basic
+network scans.
+Department of CSE Computer Networks Lab
+ROLL NO. ADITYA COLLEGE OF ENGINEERING AND TECHNOLOGIES PAGE | 45
+How To Run a Ping Scan
+One of the most basic functions of Nmap is to identify active hosts on your network. Nmap does this by using a ping scan. This identifies all of the IP addresses that are currently online without sending any packers to these hosts.
+To run a ping scan, run the following command:
+1. # nmap -sp 192.100.1.1/24
+This command then returns a list of hosts on your network and the total number of assigned IP addresses. If you spot any hosts or IP addresses on this list that you cannot account for, you can then run further commands (see below) to investigate them further.
+How To Run A Host Scan
+A more powerful way to scan your networks is to use Nmap to perform a host scan. Unlike a ping scan, a host scan actively sends ARP request packets to all the hosts connected to your network. Each host then responds to this packet with another ARP packet containing its status and MAC address.
+To run a host scan, use the following command:
+1. # nmap -sp <target IP range>
+This returns information on every host, their latency, their MAC address, and also any description associated with this address. This can be a powerful way of spotting suspicious hosts connected to your network.
+If you see anything unusual in this list, you can then run a DNS query on a specific host, by using:
+1. # namp -sL <IP address>
+This returns a list of names associated with the scanned IP. This description provides information on what the IP is actually for.
+How To Use Nmap in Kali Linux
+Using Nmap in Kali Linux can be done in an identical way to running the program on any other flavor of Linux.
+That said, there are advantages to using Kali when running Nmap scans. Most modern distros of Kali now come with a fully-features Nmap suite, which includes an advanced GUI and results viewer (Zenmap), a flexible data transfer, redirection, and debugging tool (Ncat), a utility for comparing scan results (Ndiff), and a packet generation and response analysis tool (Nping).
+Department of CSE Computer Networks Lab
+ROLL NO. ADITYA COLLEGE OF ENGINEERING AND TECHNOLOGIES PAGE | 46
+Nmap Commands
+Most of the common functions of Nmap can be executed using a single command, and the program
+also uses a number of „shortcut‟ commands that can be used to automate common tasks.
+Here is a quick run-down:
+1. Ping Scanning
+As mentioned above, a ping scan returns information on every active IP on your network. You can
+execute a ping scan using this command:
+2. Port Scanning
+Department of CSE Computer Networks Lab
+ROLL NO. ADITYA COLLEGE OF ENGINEERING AND TECHNOLOGIES PAGE | 47
+There are several ways to execute port scanning using Nmap. The most commonly used are these:
+1. # sS TCP SYN scan
+2.
+3. # sT TCP connect scan
+4.
+5. # sU UDP scans
+6.
+7. # sY SCTP INIT scan
+8.
+9. # sN TCP NULL
+The major differences between these types of scans are whether they cover TCP or UDP ports and whether they execute a TCP connection. Here are the basic differences:
+ The most basic of these scans is the sS TCP SYN scan, and this gives most users all the information they need. It scans thousands of ports per second, and because it doesn‟t complete a TCP connection it does not arouse suspicion.
+ The main alternative to this type of scan is the TCP Connect scan, which actively queries each host, and requests a response. This type of scan takes longer than a SYN scan, but can return more reliable information.
+ The UDP scan works in a similar way to the TCP connect scan but uses UDP packets to scan DNS, SNMP, and DHCP ports. These are the ports most frequently targeted by hackers, and so this type of scan is a useful tool for checking for vulnerabilities.
+ The SCTP INIT scan covers a different set of services: SS7 and SIGTRAN. This type of scan can also be used to avoid suspicion when scanning an external network because it doesn‟t complete the full SCTP process.
+ The TOP NULL scan is also a very crafty scanning technique. It uses a loophole in the TCP system that can reveal the status of ports without directly querying them, which means that you can see their status even where they are protected by a firewall.
+3. Host Scanning
+Host scanning returns more detailed information on a particular host or a range of IP addresses. As mentioned above, you can perform a host scan using the following command:
+1. # nmap -sp <target IP range>
+4. OS Scanning
+OS scanning is one of the most powerful features of Nmap. When using this type of scan, Nmap sends TCP and UDP packets to a particular port, and then analyze its response. It compares this response to a database of 2600 operating systems, and return information on the OS (and version) of a host.
+To run an OS scan, use the following command:
+1. nmap -O <target IP>
+Department of CSE Computer Networks Lab
+ROLL
