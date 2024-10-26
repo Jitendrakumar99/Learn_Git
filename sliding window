@@ -1,0 +1,50 @@
+
+6. Write a program to implement sliding window protocol for GO-BACK-N.
+#include<stdio.h>
+int main()
+{
+int windowsize, sent=0, ack, i, c;
+printf("Enter window size: \n");
+scanf("%d",&windowsize);
+while(1)
+{
+for(i=0; sent <windowsize; i++)
+{
+printf("Frame %d has been transmitted.\n", sent);
+sent++;
+if ( sent==windowsize )
+break;
+}
+printf("\n Please enter your choice:\n1-for lost data or ack or delay ack \n2- for exit.\n choice:");
+scanf("%d",&c);
+if(c== 1)
+{
+printf("\n enter the frame number:");
+scanf("%d",&ack);
+for(i=ack;i<windowsize;i++)
+{
+printf("Frame %d has been retransmitted.\n",i);
+if(i == windowsize)
+break;
+}
+}
+else
+return 0;
+}
+return 0;
+}
+OUTPUT:
+enter window size: 3
+Frame 0 has been transmitted.
+Frame 1 has been transmitted.
+Frame 2 has been transmitted.
+Please enter your choice:
+1-for lost data or ack or delay ack
+2- for exit
+choice:1
+enter the frame number:2
+Frame 2 has been retransmitted.
+Please enter your choice:
+1-for lost data or ack or delay ack
+2- for exit
+choice:2
