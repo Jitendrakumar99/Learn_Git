@@ -1,0 +1,85 @@
+Wireshark is an open-source network protocol analysis software program started
+by Gerald Combs in 1998. A global organization of network specialists and software developers support Wireshark and continue to make updates for new network technologies and encryption methods.
+Wireshark is absolutely safe to use. Government agencies, corporations, non-profits, and educational institutions use Wireshark for troubleshooting and teaching purposes.
+There isn‟t a better way to learn networking than to look at the traffic under the Wireshark microscope.
+There are questions about the legality of Wireshark since it is a powerful packet sniffer.
+The Light side of the Force says that you should only use Wireshark on networks where you have permission to inspect network packets.
+Using Wireshark to look at packets without permission is a path to the Dark Side.
+
+Wireshark is a packet sniffer and analysis tool. It captures network traffic on the local network and stores that data for offline analysis.
+Wireshark captures network traffic from Ethernet, Bluetooth, Wireless (IEEE.802.11), Token Ring, Frame Relay connections, and more.
+
+i. Packet Capture Using Wireshark
+Install Wireshark:
+
+Download and install Wireshark from its official website.
+Ensure you have the necessary permissions to capture network traffic (may require admin rights).
+Capturing Packets:
+
+Launch Wireshark.
+Select the network interface (e.g., Ethernet, Wi-Fi) you want to monitor. You'll see live packet counts next to each interface.
+Click the Start Capturing Packets button (a blue shark fin or "Start" button).
+Wireshark will begin capturing packets passing through the selected interface.
+Stop Capturing:
+
+To stop capturing, click the red square button ("Stop Capturing Packets") when you have enough data.
+
+
+ii. Starting Wireshark
+Run Wireshark:
+
+Open Wireshark after installation.
+You’ll see a list of network interfaces, recent captures, and options to open saved capture files.
+Select an Interface:
+
+Choose the interface you want to monitor.
+For example, select Wi-Fi for wireless traffic or Ethernet for wired traffic.
+Begin Capturing:
+
+Click the green shark fin icon to start capturing traffic.
+Wireshark will begin displaying captured packets in real time.
+
+
+iii. Viewing Captured Traffic
+Main Interface Layout:
+
+Packet List Pane: Shows all captured packets with columns like No., Time, Source, Destination, Protocol, Length, and Info.
+Packet Details Pane: Displays detailed information about the selected packet, broken into protocol layers.
+Packet Bytes Pane: Shows the raw data of the selected packet in hexadecimal and ASCII formats.
+Inspecting Packets:
+
+Click on a packet in the Packet List Pane to see its detailed information in the Packet Details Pane.
+Expand protocol layers (e.g., Ethernet, IP, TCP) to analyze headers and payloads.
+Time Display:
+
+Use View > Time Display Format to customize the time format (e.g., seconds since the capture started, absolute time).
+Search Packets:
+
+Use Ctrl+F to search for packets based on strings, values, or packet details.
+iv. Analysis and Statistics & Filters
+Filters:
+
+Display Filters:
+Refine what you see in the packet list. Examples:
+ip.src == 192.168.1.1 (filter by source IP).
+http (show only HTTP packets).
+tcp.port == 80 (show traffic for a specific port).
+Apply filters in the "Display Filter" bar at the top.
+Capture Filters:
+Set conditions before capturing packets. Examples:
+host 192.168.1.1 (capture traffic to/from this host).
+port 443 (capture traffic on port 443).
+Statistics:
+
+Go to the Statistics menu for various tools:
+Protocol Hierarchy: Shows a breakdown of protocols in the capture.
+Conversations: Displays communication between IPs or MAC addresses.
+Endpoints: Shows details about network endpoints.
+IO Graphs: Visualizes traffic trends over time.
+Packet Analysis:
+
+Expand protocols in the Packet Details Pane to examine headers, such as IP, TCP, and application-layer data.
+Right-click a field to apply filters or follow a stream (e.g., HTTP, TCP, or UDP).
+Follow Streams:
+
+Right-click a packet and select Follow TCP/UDP/HTTP Stream to reconstruct communication for easier analysis.
