@@ -1,0 +1,211 @@
+#Experiment-12: Exploratory Data Analysis for Classification using Pandas or Matplotlib.
+import pandas as pd
+import numpy as np
+import seaborn as sns
+data=pd.read_csv('/content/drive/MyDrive/Colab Notebooks/sale.csv')
+print(data)
+# print(data.head())
+# print(data.shape)
+print(data.isnull().sum())
+print("correlation",data.corr());
+sns.displot(data['Sales'])
+
+
+
+#Experiment-8: 
+#Write a program to implement k-Nearest Neighbor algorithm to classify the iris data set. Print both correct and wrong predictions.
+#Program:
+
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import train_test_split 
+from sklearn.datasets import load_iris
+irisData=load_iris()
+x=irisData.data
+y=irisData.target
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2)
+knn=KNeighborsClassifier(n_neighbors=7)
+knn.fit(x_train,y_train)
+y_pred=knn.predict(x_test)
+from sklearn.metrics import confusion_matrix,accuracy_score
+cm=confusion_matrix(y_test,y_pred)
+print(cm)
+a=accuracy_score(y_test,y_pred)
+print(a)
+
+
+
+
+#Experiment-6: Write a program to implement Categorical Encoding, One-hot Encoding
+#Program:
+from numpy import asarray
+from sklearn.preprocessing import OneHotEncoder
+data=asarray([['red'],['green'],['blue']])
+print(data)
+encoder=OneHotEncoder(sparse_output=False)
+onehot=encoder.fit_transform(data)
+print(onehot)
+
+
+
+#Experiment-2: 
+#For a given set of training data examples stored in a .CSV file, implement and demonstrate the Candidate Elimination algorithm to output a description of the set of all hypotheses consistent with the training examples.
+
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv("/content/drive/MyDrive/Colab Notebooks/ws.csv")
+attr = np.array(df.iloc[:, :-1])
+print("\nInstances are:\n",attr)
+target = np.array(df.iloc[:, -1])
+print("\nTarget Values are:",target)
+def learn(attr, target):
+    s = attr[0].copy()
+    print("\nInitialization of specific_h and general_h:\n")
+    print("\nSpecfic Boundary:",s)
+    g = [['?' for _ in range(len(s))] for _ in range(len(s))]
+    print("\nGeneric Boundary:",g)
+    for i, h in enumerate(attr):
+        if target[i] == "Yes":
+            for j in range(len(s)):
+                if h[j] != s[j]:
+                    s[j] = '?'
+                    g[j][j] = '?'
+        else:
+            for j in range(len(s)):
+                g[j][j] = s[j] if h[j] != s[j] else '?'
+    g = [h for h in g if h != ['?' for _ in range(len(s))]]
+    return s, g
+
+s_final, g_final = learn(attr, target)
+print("Specific Hypothesis:", s_final)
+print("General Hypotheses:", g_final)
+
+
+
+
+#Experiment-14: 
+#Write a program to Implement Support Vector Machines and Principle Component Analysis.
+#Program:
+
+from sklearn.datasets import load_breast_cancer
+from sklearn.decomposition import PCA
+from sklearn.svm import SVC
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+import matplotlib.pyplot as plt
+
+X, y = load_breast_cancer(return_X_y=True)
+X_pca = PCA(n_components=2).fit_transform(X)
+
+X_train, X_test, y_train, y_test = train_test_split(X_pca, y, test_size=0.2, random_state=42)
+model = SVC(kernel='linear').fit(X_train, y_train)
+
+print("Accuracy Score:", accuracy_score(y_test, model.predict(X_test)))
+
+plt.scatter(X_pca[:, 0], X_pca[:, 1], c=y, cmap='coolwarm', s=20, edgecolors='k')
+plt.title("SVM with PCA (Breast Cancer Dataset)")
+plt.xlabel("PC 1"), 
+plt.ylabel("PC 2"), 
+plt.show()
+
+
+
+
+#Experiment-4: Exercises to solve the real-world problems using the following machine learning methods: a) Linear Regression b) Logistic Regression c) Binary Classifier
+#a) Linear Regression
+
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error,r2_score
+data=pd.read_csv('/content/drive/MyDrive/Colab Notebooks/sale.csv')
+x=data[['Week']]
+y=data['Sales']
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=42)
+model=LinearRegression()
+model.fit(x_train,y_train)
+user_week=int(input('enter the week you wan to predict the salse'))
+sales=model.predict([[user_week]])
+print('sales for week',user_week,'is',sales[0])
+y_pred=model.predict(x_test)
+mse=mean_squared_error(y_test,y_pred)
+r2=r2_score(y_test,y_pred)
+print('Mean Squared Error:',mse)
+print('R-squared:',r2)
+plt.scatter(x,y,color='blue')
+plt.plot(x,model.predict(x),color='red')
+plt.xlabel('Week')
+plt.ylabel('sales')
+plt.title("Linear regrassion")
+plt.show()
+
+
+
+
+#c) Binary Classifier
+#Program:
+from numpy import where
+from collections import Counter
+from sklearn.datasets import make_blobs
+from matplotlib import pyplot
+print(make_blobs)
+x,y=make_blobs(n_samples=1000,centers=2,random_state=1)
+print(x.shape,y.shape)
+counter=Counter(y)
+print(counter)
+for i in range(10):
+    print(x[i],y[i])
+for label,_ in counter.items():
+    row_ix=where(y ==label)[0]
+    if label == 0:
+        pyplot.scatter(x[row_ix, 0],x[row_ix, 1], label='Class 0', color='blue')
+    else:
+        pyplot.scatter(x[row_ix, 0],x[row_ix, 1], label='Class 1', color='red')
+pyplot.legend()
+pyplot.show()
+
+
+
+
+
+
+10.
+import java.io.*;
+import java.util.*;
+
+public class NaiveBayesFile {
+
+    public static void main(String[] args) {
+        Map<String, Integer> pos = new HashMap<>(), neg = new HashMap<>();
+        try (BufferedReader br = new BufferedReader(new FileReader("training_data.txt"))) {
+            br.lines().forEach(line -> Arrays.stream(line.split(":")[1].split(" "))
+                .forEach(word -> (line.startsWith("positive") ? pos : neg)
+                    .put(word, (line.startsWith("positive") ? pos : neg).getOrDefault(word, 0) + 1)));
+        } catch (IOException e) { e.printStackTrace(); }
+
+        try (BufferedReader br = new BufferedReader(new FileReader("test_data.txt"))) {
+            br.lines().forEach(line -> System.out.printf("Text: %-40s Predicted: %-9s\n", line, 
+                classify(pos, neg, line)));
+        } catch (IOException e) { e.printStackTrace(); }
+    }
+
+    static String classify(Map<String, Integer> pos, Map<String, Integer> neg, String text) {
+        double posScore = 1, negScore = 1;
+        for (String word : text.split(" ")) {
+            posScore *= (pos.getOrDefault(word.toLowerCase(), 0) + 1);
+            negScore *= (neg.getOrDefault(word.toLowerCase(), 0) + 1);
+        }
+        return posScore > negScore ? "positive" : "negative";
+    }
+}
+
+(* test *)
+I love this awesome movie
+This is a terrible and bad film
+What a wonderful experience
+That was the worst movie ever
+
+(* traning *)
+positive: good happy awesome nice great love excellent amazing wonderful
+negative: bad sad terrible awful hate worse horrible negative ugly worst
